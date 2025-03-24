@@ -52,13 +52,12 @@ export default function ContactPage() {
   return (
     <div className="relative min-h-[calc(100vh-16rem)]">
       <div className="absolute inset-0 bg-black/20 z-10" />
-      <div className="absolute top-0 right-0 w-[1000px] h-[1000px] opacity-50">
+      <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[550px] md:h-[500px]">
         <Image
           src="/BG.png"
           alt="Background decoration"
-          width={1000}
-          height={1000}
-          className="object-contain"
+          fill
+          className="object-contain opacity-80"
           priority
         />
       </div>
@@ -73,7 +72,7 @@ export default function ContactPage() {
           </p>
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
-            <div className="space-y-8">
+            <div className="space-y-8 p-8">
               <div>
                 <h2 className="font-heading text-2xl font-bold">
                   Contact Information
@@ -137,25 +136,30 @@ export default function ContactPage() {
               </div>
             </div>
 
-            <div>
+            <div className="p-8 rounded-lg bg-black/20 backdrop-blur-sm border border-white/10">
               <h2 className="font-heading text-2xl font-bold">Get in Touch</h2>
-              <p className="mt-2 text-muted-foreground">
+              <p className="mt-2 text-white/80">
                 Fill out the form and we'll get back to you as soon as possible.
               </p>
 
               <form onSubmit={handleSubmit} className="mt-6 space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="text-white/80">
+                    Name
+                  </Label>
                   <Input
                     id="name"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     required
+                    className="bg-black/20 border-white/10 text-white placeholder:text-white/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-white/80">
+                    Email
+                  </Label>
                   <Input
                     id="email"
                     name="email"
@@ -163,10 +167,13 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     required
+                    className="bg-black/20 border-white/10 text-white placeholder:text-white/50"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message</Label>
+                  <Label htmlFor="message" className="text-white/80">
+                    Message
+                  </Label>
                   <Textarea
                     id="message"
                     name="message"
@@ -174,6 +181,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={handleChange}
                     required
+                    className="bg-black/20 border-white/10 text-white placeholder:text-white/50"
                   />
                 </div>
                 <Button

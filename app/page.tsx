@@ -5,40 +5,28 @@ import { Button } from "@/components/ui/button";
 import ProductCard from "@/components/product-card";
 import CategoryCard from "@/components/category-card";
 import { featuredProducts, categories } from "@/lib/data";
+import HeroVideo from "./components/hero-video/index";
 
 export default function Home() {
   return (
     <div className="flex flex-col">
-      {/* Hero Section */}
-      <section className="relative flex h-[80vh] items-center justify-center overflow-hidden bg-black">
+      {/* Hero Section with Video Background */}
+      <section className="relative flex h-[80vh] items-center justify-center overflow-hidden">
+        <HeroVideo />
         <div className="absolute inset-0 bg-background/40 backdrop-blur-sm dark:bg-background/60" />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px]">
-          <Image
-            src="/BG.png"
-            alt="Background decoration"
-            fill
-            className="object-contain"
-            priority
-          />
-        </div>
         <div className="container px-4">
           <div className="relative z-10 text-center">
-            <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-white">
+            <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
               Shine Brighter. <span className="text-primary">Be Extra.</span>
             </h1>
-            <p className="mx-auto mt-4 max-w-lg text-lg text-white/80 md:text-xl">
+            <p className="mx-auto mt-4 max-w-lg text-lg text-muted-foreground md:text-xl">
               Luxury rhinestone accessories that make a statement.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Button asChild size="lg">
                 <Link href="/products">Shop Now</Link>
               </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20"
-              >
+              <Button variant="outline" size="lg" asChild>
                 <Link href="/about">Our Story</Link>
               </Button>
             </div>
