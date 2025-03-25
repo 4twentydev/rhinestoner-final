@@ -1,37 +1,37 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Image from "next/image"
-import Link from "next/link"
-import { notFound, useRouter } from "next/navigation"
-import { ArrowLeft, Star, Minus, Plus, Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { getProductById, getRelatedProducts } from "@/lib/data"
-import { useCart } from "@/lib/use-cart"
-import { toast } from "@/hooks/use-toast"
-import ProductCard from "@/components/product-card"
+import { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound, useRouter } from "next/navigation";
+import { ArrowLeft, Star, Minus, Plus, Check } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { getProductById, getRelatedProducts } from "@/lib/data";
+import { useCart } from "@/lib/use-cart";
+import { toast } from "@/hooks/use-toast";
+import ProductCard from "@/components/product-card";
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const router = useRouter()
-  const product = getProductById(params.id)
-  const [quantity, setQuantity] = useState(1)
-  const { addItem } = useCart()
+  const router = useRouter();
+  const product = getProductById(params.id);
+  const [quantity, setQuantity] = useState(1);
+  const { addItem } = useCart();
 
   if (!product) {
-    notFound()
+    notFound();
   }
 
-  const relatedProducts = getRelatedProducts(product.id, product.category)
+  const relatedProducts = getRelatedProducts(product.id, product.category);
 
   const decreaseQuantity = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1)
+      setQuantity(quantity - 1);
     }
-  }
+  };
 
   const increaseQuantity = () => {
-    setQuantity(quantity + 1)
-  }
+    setQuantity(quantity + 1);
+  };
 
   const handleAddToCart = () => {
     addItem({
@@ -40,13 +40,13 @@ export default function ProductPage({ params }: { params: { id: string } }) {
       price: product.price,
       image: product.image,
       quantity,
-    })
+    });
 
     toast({
       title: "Added to cart",
       description: `${product.name} (${quantity}) has been added to your cart.`,
-    })
-  }
+    });
+  };
 
   return (
     <div className="container px-4 py-8 md:py-12">
@@ -71,8 +71,11 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             />
           </div>
           <div className="grid grid-cols-4 gap-2">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="overflow-hidden rounded-md border">
+            {Array.from({ length: 4 }, (_, i) => (
+              <div
+                key={`${product.id}-thumbnail-${i}`}
+                className="overflow-hidden rounded-md border"
+              >
                 <Image
                   src={product.image || "/placeholder.svg"}
                   alt={`${product.name} thumbnail ${i + 1}`}
@@ -90,20 +93,28 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             <h1 className="font-heading text-3xl font-bold">{product.name}</h1>
             <div className="mt-2 flex items-center">
               <div className="flex">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(5)].map((_, index) => (
                   <Star
-                    key={i}
-                    className={`h-5 w-5 ${i < 4 ? "fill-primary text-primary" : "fill-muted text-muted"}`}
+                    key={`star-${product.id}-${index}`}
+                    className={`h-5 w-5 ${
+                      index < 4
+                        ? "fill-primary text-primary"
+                        : "fill-muted text-muted"
+                    }`}
                   />
                 ))}
               </div>
-              <span className="ml-2 text-sm text-muted-foreground">4.0 (24 reviews)</span>
+              <span className="ml-2 text-sm text-muted-foreground">
+                4.0 (24 reviews)
+              </span>
             </div>
           </div>
 
           <div>
             <p className="text-2xl font-bold">${product.price.toFixed(2)}</p>
-            <p className="mt-1 text-sm text-muted-foreground">Free shipping on orders over $50</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Free shipping on orders over $50
+            </p>
           </div>
 
           <div className="space-y-2">
@@ -151,15 +162,21 @@ export default function ProductPage({ params }: { params: { id: string } }) {
           <div className="space-y-2 border-t pt-6">
             <p className="flex items-center justify-between text-sm">
               <span className="font-medium">Material</span>
-              <span className="text-muted-foreground">Premium rhinestones, metal</span>
+              <span className="text-muted-foreground">
+                Premium rhinestones, metal
+              </span>
             </p>
             <p className="flex items-center justify-between text-sm">
               <span className="font-medium">Dimensions</span>
-              <span className="text-muted-foreground">{product.dimensions || "Varies by product"}</span>
+              <span className="text-muted-foreground">
+                {product.dimensions || "Varies by product"}
+              </span>
             </p>
             <p className="flex items-center justify-between text-sm">
               <span className="font-medium">SKU</span>
-              <span className="text-muted-foreground">{product.sku || `RS-${params.id}`}</span>
+              <span className="text-muted-foreground">
+                {product.sku || `RS-${params.id}`}
+              </span>
             </p>
           </div>
         </div>
@@ -167,7 +184,9 @@ export default function ProductPage({ params }: { params: { id: string } }) {
 
       {relatedProducts.length > 0 && (
         <div className="mt-16">
-          <h2 className="font-heading text-2xl font-bold mb-6">You might also like</h2>
+          <h2 className="font-heading text-2xl font-bold mb-6">
+            You might also like
+          </h2>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {relatedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
@@ -176,6 +195,5 @@ export default function ProductPage({ params }: { params: { id: string } }) {
         </div>
       )}
     </div>
-  )
+  );
 }
-

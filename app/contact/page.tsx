@@ -52,12 +52,12 @@ export default function ContactPage() {
   return (
     <div className="relative min-h-[calc(100vh-16rem)]">
       <div className="absolute inset-0 bg-black/20 z-10" />
-      <div className="absolute top-0 right-0 w-[300px] h-[300px] md:w-[550px] md:h-[500px]">
+      <div className="absolute top-0 right-0 w-[350px] h-[350px] md:w-[400px] md:h-[400px] xl:h-[500px] xl:w-[550px]">
         <Image
           src="/BG.png"
           alt="Background decoration"
           fill
-          className="object-contain opacity-80"
+          className="object-contain opacity-70 fixed top-0 right-0"
           priority
         />
       </div>

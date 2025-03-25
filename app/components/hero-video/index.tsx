@@ -5,7 +5,7 @@ import React from "react";
 export default function HeroVideo() {
   return (
     <>
-      <div className="absolute inset-0 bg-muted/80 dark:bg-muted/40">
+      <div className="absolute inset-0 bg-muted/20 dark:bg-muted/20">
         {/* Video placeholder that will be replaced when video loads */}
         <div className="h-full w-full animate-pulse bg-muted/50" />
       </div>
